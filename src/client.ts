@@ -11,4 +11,6 @@ const ensureEnv = (name: string) => {
 const supabaseUrl = ensureEnv("SUPABASE_URL");
 const supabaseKey = ensureEnv("SUPABASE_KEY");
 
-export const client = createClient(supabaseUrl!, supabaseKey!);
+export const client = createClient(supabaseUrl!, supabaseKey!, {
+  db: { schema: "queries" },
+});
