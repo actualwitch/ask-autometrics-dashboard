@@ -19,6 +19,13 @@ const body = css`
     color: #fff;
     font-family: sans-serif;
   }
+  a {
+    color: rgb(187, 122, 255);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const isDev = process.env.NODE_ENV === "development";
