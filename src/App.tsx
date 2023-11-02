@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Global, css } from "@emotion/react";
+import { Global } from "@emotion/react";
 import {
   PostgrestSingleResponse,
   User,
@@ -9,24 +9,8 @@ import { parse } from "marked";
 import { sanitize } from "dompurify";
 
 import { client } from "./client";
-import { Banner, Button, Container, Main, NavBar } from "./styled";
+import { Banner, Button, Container, Main, NavBar, globalStyle } from "./styled";
 import logo from "./logo.svg";
-
-const body = css`
-  body {
-    margin: 0;
-    background-color: #222;
-    color: #fff;
-    font-family: sans-serif;
-  }
-  a {
-    color: rgb(187, 122, 255);
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -63,7 +47,7 @@ const getQueriesWithOffset = async (offset: number) => {
     .from("query_history")
     .select("id, created_at, query, response")
     .order("id", { ascending: false })
-    .range(offset, offset + 10);
+    .range(offset, offset + 9);
   return data;
 };
 
@@ -133,6 +117,15 @@ const Success = ({
             <header>
               {">"} {query.query}
             </header>
+            <small>
+              (asked{" "}
+              {new Intl.DateTimeFormat("ie-GB", {
+                dateStyle: "full",
+                timeStyle: "long",
+                timeZone: "Europe/Amsterdam",
+              }).format(new Date(query.created_at))}
+              )
+            </small>
             <section>
               <div
                 dangerouslySetInnerHTML={{
@@ -163,7 +156,7 @@ function App() {
   return (
     <div className="App">
       {user ? <Success user={user} onSignOut={onSignOut} /> : <SignIn />}
-      <Global styles={body} />
+      <Global styles={globalStyle} />
     </div>
   );
 }

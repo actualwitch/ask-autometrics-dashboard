@@ -1,4 +1,21 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+
+export const globalStyle = css`
+  body {
+    margin: 0;
+    background-color: #222;
+    color: #fff;
+    font-family: sans-serif;
+  }
+  a {
+    color: rgb(187, 122, 255);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
 export const Button = styled.button`
   border: 1px solid transparent;
@@ -50,6 +67,10 @@ export const Main = styled.main`
     margin-top: 1ch;
     border-top: 1px solid #ccc;
     padding-top: 2ch;
+  }
+  small {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
   }
 `;
 
